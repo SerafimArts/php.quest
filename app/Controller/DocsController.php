@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Domain\Documentation;
 use App\Infrastructure\Persistence\Repository\DocsRepositoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,7 +32,7 @@ final readonly class DocsController
             throw new NotFoundHttpException('Not Found');
         }
 
-        return $this->response($page);
+        return new RedirectResponse('/' . $page->getSlug());
     }
 
     #[Route(path: '/{urn}', name: 'show', methods: 'GET')]
