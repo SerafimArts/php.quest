@@ -1,0 +1,40 @@
+parameters:
+
+imports:
+  - { resource: services/*.yaml }
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  # ----------------------------------------------------------------------------
+  #  Controllers
+  # ----------------------------------------------------------------------------
+
+  App\Controller\:
+    resource: '../app/Controller'
+    public: true
+
+  # ----------------------------------------------------------------------------
+  #  Symfony PSR-20 Clock
+  # ----------------------------------------------------------------------------
+
+  Symfony\Component\Clock\NativeClock: ~
+
+  Symfony\Component\Clock\ClockInterface:
+    alias: Symfony\Component\Clock\NativeClock
+
+  Psr\Clock\ClockInterface:
+    alias: Symfony\Component\Clock\NativeClock
+
+  # ----------------------------------------------------------------------------
+  #  Symfony Slugger
+  # ----------------------------------------------------------------------------
+
+  Symfony\Component\String\Slugger\AsciiSlugger:
+    arguments:
+      - '%kernel.default_locale%'
+
+  Symfony\Component\String\Slugger\SluggerInterface:
+    alias: Symfony\Component\String\Slugger\AsciiSlugger

@@ -1,0 +1,12 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  # ----------------------------------------------------------------------------
+  #  Services
+  # ----------------------------------------------------------------------------
+
+  App\Infrastructure\View\Twig\Service\TranslationService: ~
+  App\Infrastructure\View\Twig\Service\PageCategoriesService: ~

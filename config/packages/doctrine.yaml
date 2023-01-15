@@ -1,0 +1,50 @@
+doctrine:
+  dbal:
+    driver: pdo_sqlite
+    url: 'sqlite:///%kernel.project_dir%/var/db.sqlite'
+    charset: utf8
+    logging: true
+    types:
+      # Custom
+      uuid: Ramsey\Uuid\Doctrine\UuidType
+      # Identifiers
+      App\Domain\Shared\CategoryId: App\Infrastructure\Persistence\Doctrine\Types\CategoryIdType
+      App\Domain\Shared\DocumentationId: App\Infrastructure\Persistence\Doctrine\Types\DocumentationIdType
+
+  orm:
+    auto_generate_proxy_classes: true
+    enable_lazy_ghost_objects: true
+    naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+    auto_mapping: true
+    mappings:
+      App:
+        is_bundle: false
+        dir: '%kernel.project_dir%/app/Domain'
+        prefix: App\Domain
+        alias: App
+
+when@test:
+  doctrine:
+    dbal:
+      # "TEST_TOKEN" is typically set by ParaTest
+      dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+
+when@prod:
+  doctrine:
+    orm:
+      auto_generate_proxy_classes: false
+      proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
+      query_cache_driver:
+        type: pool
+        pool: doctrine.system_cache_pool
+      result_cache_driver:
+        type: pool
+        pool: doctrine.result_cache_pool
+
+  framework:
+    cache:
+      pools:
+        doctrine.result_cache_pool:
+          adapter: cache.app
+        doctrine.system_cache_pool:
+          adapter: cache.system

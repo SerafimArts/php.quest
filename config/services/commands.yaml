@@ -1,0 +1,12 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Command\:
+    resource: '%kernel.project_dir%/app/Command/'
+
+  App\Command\DocsPrerenderCommand:
+    arguments:
+      - '@Local\ContentRenderer\Renderer\DocumentationRenderer'

@@ -1,0 +1,9 @@
+twig:
+  globals:
+    i18n: '@App\Infrastructure\View\Twig\Service\TranslationService'
+    categories: '@App\Infrastructure\View\Twig\Service\PageCategoriesService'
+  default_path: '%kernel.project_dir%/resources/templates'
+
+when@test:
+  twig:
+    strict_variables: true

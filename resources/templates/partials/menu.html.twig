@@ -1,0 +1,18 @@
+<section class="aside">
+    <a href="/" class="header">
+        <img src="{{ asset('dist/images/logo.png') }}" height="38" alt="logo" />
+        <h3>Без регистрации и СМС</h3>
+    </a>
+
+    <aside class="menu">
+        {% for category in categories.all() %}
+            <nav class="category">
+                <h2>{{ category.title }}</h2>
+                {% for page in category.pages %}
+                    {% set active = app.request.attributes.get('_route_params').urn == page.slug %}
+                    <a href="/{{ page.slug }}" class="{{ active ? 'active' : '' }}">{{ page.title }}</a>
+                {% endfor %}
+            </nav>
+        {% endfor %}
+    </aside>
+</section>

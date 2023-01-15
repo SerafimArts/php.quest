@@ -1,0 +1,42 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  # ----------------------------------------------------------------------------
+  #  Repositories
+  # ----------------------------------------------------------------------------
+
+  App\Infrastructure\Persistence\Repository\CategoriesRepositoryInterface:
+    class: App\Infrastructure\Persistence\Repository\DatabaseCategoriesRepository
+
+  App\Infrastructure\Persistence\Repository\DocsRepositoryInterface:
+    class: App\Infrastructure\Persistence\Repository\DatabaseDocsRepository
+
+  # ----------------------------------------------------------------------------
+  #  Listeners
+  # ----------------------------------------------------------------------------
+
+  App\Infrastructure\Persistence\Doctrine\Listener\CreatedAtListener:
+    tags:
+      - { name: doctrine.event_listener, event: prePersist }
+
+  App\Infrastructure\Persistence\Doctrine\Listener\UpdatedAtListener:
+    tags:
+      - { name: doctrine.event_listener, event: preUpdate }
+
+  # ----------------------------------------------------------------------------
+  #  Subscribers
+  # ----------------------------------------------------------------------------
+
+  App\Infrastructure\Persistence\Doctrine\Subscriber\SlugGeneratorSubscriber:
+    tags:
+      - { name: doctrine.event_subscriber }
+
+  App\Infrastructure\Persistence\Doctrine\Subscriber\ContentRenderSubscriber:
+    arguments:
+      - '@Local\ContentRenderer\Renderer\DocumentationRenderer'
+    tags:
+      - { name: doctrine.event_subscriber }
+

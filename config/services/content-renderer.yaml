@@ -1,0 +1,11 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Local\ContentRenderer\Renderer\DefaultRenderer: ~
+  Local\ContentRenderer\Renderer\DocumentationRenderer: ~
+
+  Local\ContentRenderer\ContentRendererInterface:
+    alias: Local\ContentRenderer\Renderer\DefaultRenderer

@@ -1,0 +1,171 @@
+
+a {
+  color: $color-main;
+
+  &:hover {
+    color: #ae508d;
+    text-decoration: underline;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  a {
+    color: $color-text;
+    &:hover {
+      color: $color-text;
+      text-decoration: underline dotted;
+    }
+  }
+}
+
+pre, code {
+  font-family: $font-family-mono;
+  font-size: $font-size;
+  line-height: $font-height;
+  white-space: pre;
+}
+
+code {
+  background: $color-white;
+  border-radius: 3px;
+  padding: 2px 6px;
+  box-sizing: border-box;
+  height: $font-height;
+  background: $color-gray-extra-light;
+}
+
+p {
+  margin: 15px 0;
+}
+
+blockquote {
+  padding: 20px 30px;
+  height: auto;
+  border-radius: 6px;
+  line-height: $font-size + 12px;
+  color: $color-text;
+  background: $color-gray-extra-light;
+  margin: 20px 0;
+  min-height: 22px;
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    left: 22px;
+    top: 50%;
+    margin-top: -16px;
+    background-size: 32px auto !important;
+    pointer-events: none;
+  }
+
+  code {
+    background: $color-white;
+  }
+
+  &.quote {
+    &-warning,
+    &-note {
+      padding-left: 78px;
+      color: $color-text;
+
+      code {
+        background: rgba(#fff, .6);
+        box-shadow:
+          inset 0 0 0 1px #fff,
+          $box-shadow-alt;
+      }
+    }
+
+    &-warning {
+      background: $color-danger-bg;
+      box-shadow: inset 0 0 0 1px $color-danger;
+
+      a {
+        color: $color-danger;
+      }
+
+      &:before {
+        background: url(../../images/warning.svg) center center no-repeat;
+      }
+    }
+
+    &-note {
+      background: $color-warning-bg;
+      box-shadow: inset 0 0 0 1px $color-warning;
+
+      a {
+        color: $color-warning;
+      }
+
+      &:before {
+        background: url(../../images/note.svg) center center no-repeat;
+      }
+    }
+  }
+
+  & > p {
+    padding: 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  & > p > strong {
+    display: none;
+    & + br {
+      display: none;
+    }
+  }
+}
+
+figure {
+  margin: 0;
+  padding: $padding 0;
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  display: block;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+ul {
+  padding-left: 2rem;
+  margin-bottom: .1rem;
+
+  li {
+    margin-bottom: .5rem;
+    list-style: circle;
+    position: relative;
+
+    a {
+      color: $color-main;
+      cursor: pointer;
+    }
+
+    ul {
+      padding-left: 1.4rem;
+      margin-top: .4rem;
+      font-size: $font-size-description;
+      line-height: $font-height-description;
+
+      li {
+        margin-bottom: .5rem;
+      }
+    }
+  }
+}

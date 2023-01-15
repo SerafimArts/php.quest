@@ -1,0 +1,39 @@
+{% extends 'layout/master.html.twig' %}
+
+{% block title %}
+    {{ page.title }}
+{% endblock %}
+
+{% block body %}
+    <main itemscope itemtype="https://schema.org/WebPage" class="documentation">
+        {% include "partials/menu.html.twig" %}
+
+        <section class="container">
+            <div class="container-content" data-vm="DocumentationViewModel">
+
+                <article class="container-content-article article">
+                    {% set menu = page.getCategory() %}
+                    {% if menu is not null %}
+                        <div class="breadcrumbs">
+                            <span class="item">{{ menu.title }}</span>
+                            <span class="item">{{ page.title }}</span>
+                        </div>
+                    {% endif %}
+                    {{ page.content|raw }}
+                </article>
+
+                <!--ko if: anchors().length > 1 -->
+                <aside class="container-content-aside">
+                    <nav class="container-content-aside-nav" data-bind="foreach: anchors">
+                        <a href="#" data-bind="attr: { href: '#' + slug }, css: { active: active }">
+                            <span data-bind="text: $index().toString().padStart(2, '0') + '.'"></span>
+                            <!--ko text: title--><!--/ko-->
+                        </a>
+                    </nav>
+                </aside>
+                <!--/ko-->
+
+            </div>
+        </section>
+    </main>
+{% endblock %}

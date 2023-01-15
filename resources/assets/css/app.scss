@@ -1,0 +1,172 @@
+@charset "utf-8";
+
+@use "sass:math";
+
+@import '~reset-scss';
+
+@import 'kernel';
+
+:root {
+  --color-main:  #{$color-main};
+  --color-alt:   #{$color-alt};
+  --color-text:  #{$color-text};
+  --color-white: #{$color-white};
+
+  --color-warning:    #{$color-warning};
+  --color-warning-bg: #{$color-warning-bg};
+  --color-danger:     #{$color-danger};
+  --color-danger-bg:  #{$color-danger-bg};
+
+  --color-gray-extra-light: #{$color-gray-extra-light};
+  --color-gray-light:       #{$color-gray-light};
+  --color-gray:             #{$color-gray};
+  --color-gray-dark:        #{$color-gray-dark};
+  --color-gray-extra-dark:  #{$color-gray-extra-dark};
+}
+
+$color-main: var(--color-main);
+$color-alt: var(--color-alt);
+$color-text: var(--color-text);
+$color-white: var(--color-white);
+
+$color-warning: var(--color-warning);
+$color-warning-bg: var(--color-warning-bg);
+$color-danger: var(--color-danger);
+$color-danger-bg: var(--color-danger-bg);
+
+$color-gray-extra-light: var(--color-gray-extra-light);
+$color-gray-light: var(--color-gray-light);
+$color-gray: var(--color-gray);
+$color-gray-dark: var(--color-gray-dark);
+$color-gray-extra-dark: var(--color-gray-extra-dark);
+
+html,
+body {
+  @include font-optimize;
+  width: 100%;
+  max-width: 100%;
+  color: $color-text;
+  background: $color-white;
+  min-height: 100vh;
+  min-width: map-get($grid-breakpoints, sm);
+  scroll-behavior: smooth;
+  font-size: $font-size;
+  line-height: $font-height;
+  font-family: $font-family;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: $color-gray-extra-light;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-main;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $color-alt;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $font-family-headings;
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: $h1-size;
+    line-height: $h1-height;
+    margin: ($h1-size * 1.5) 0 math.div($h1-size, 1.6) 0;
+  }
+
+  h2 {
+    font-size: $h2-size;
+    line-height: $h2-height;
+    margin: ($h2-size * 1.5) 0 math.div($h2-size, 1.6) 0;
+  }
+
+  h3 {
+    font-size: $h3-size;
+    line-height: $h3-height;
+    margin: ($h3-size * 1.5) 0 math.div($h3-size, 1.6) 0;
+  }
+
+  h4 {
+    font-size: $h4-size;
+    line-height: $h4-height;
+    margin: ($h4-size * 1.5) 0 math.div($h4-size, 1.6) 0;
+  }
+
+  h5 {
+    font-size: $h5-size;
+    margin: ($h5-size * 1.5) 0 math.div($h5-size, 1.6) 0;
+  }
+
+  h6 {
+    font-size: $h6-size;
+    margin: ($h6-size * 1.5) 0 math.div($h6-size, 1.6) 0;
+  }
+
+  @import 'page/documentation';
+}
+
+.article {
+  @import './article/code';
+  @import './article/typography';
+}
+
+.breadcrumbs {
+  display: flex;
+
+  .item {
+    $arrow-size: $height-small - 7px;
+    $item-padding: $padding * 2;
+
+    display: block;
+    background: $color-gray-extra-light;
+    color: $color-gray-dark;
+    padding: 0 $item-padding 0 $item-padding * 1.4;
+    line-height: $height-small;
+    font-size: $font-size-description;
+    border-radius: 3px;
+    position: relative;
+    margin-right: 2px;
+
+    &:first-child {
+      padding-left: $item-padding;
+      &:before {
+        display: none;
+      }
+    }
+
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      border-radius: 2px;
+      height: $arrow-size;
+      width: $arrow-size;
+      background: $color-white;
+      transform-origin: 50%;
+      transform: rotate(45deg);
+      top: math.div($height-small - $arrow-size, 2);
+    }
+
+    &:before {
+      left: math.div(-$arrow-size, 2) + 2;
+    }
+
+    &:after {
+      right: math.div(-$arrow-size, 2) + 2;
+      background: $color-gray-extra-light;
+      z-index: 2;
+    }
+  }
+}

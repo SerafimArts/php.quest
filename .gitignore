@@ -1,0 +1,7 @@
+/.env
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+/node_modules/
+/.idea/

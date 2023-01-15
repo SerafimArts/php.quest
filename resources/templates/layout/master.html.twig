@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="{{ i18n.current }}">
+<head>
+    {% apply spaceless %}
+        <meta charset="utf-8" />
+
+        <title>{% block title %}Welcome!{% endblock %} &mdash; PHP::Quest</title>
+
+        <meta name="viewport"
+                  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <meta name="referrer" content="no-referrer-when-downgrade" />
+
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta http-equiv="x-dns-prefetch-control" content="on" />
+
+        <meta property="og:locale" content="{{ i18n.current }}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="{{ block('title') }}" />
+
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+
+        <link rel="icon" href="/favicon.ico" sizes="any">
+        <link rel="shortcut icon" href="{{ asset('dist/images/x32.png') }}" />
+        <link rel="apple-touch-icon" sizes="32x32" href="{{ asset('dist/images/x32.png') }}" />
+        <link rel="apple-touch-icon" sizes="64x64" href="{{ asset('dist/images/x64.png') }}" />
+        <link rel="apple-touch-icon" sizes="128x128" href="{{ asset('dist/images/x128.png') }}" />
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Nunito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    {% endapply %}
+</head>
+<body>
+    {% block body %}{% endblock %}
+</body>
+</html>

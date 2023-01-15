@@ -1,0 +1,279 @@
+@use 'sass:math';
+
+.documentation {
+  $padding-vertical: 50px;
+
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  align-items: stretch;
+
+  .aside,
+  .container {
+    padding: $padding-vertical 0;
+    min-height: 100vh;
+  }
+
+  .aside {
+    width: 250px;
+    min-width: 250px;
+    flex: 0 0 250px;
+    background: $color-gray-extra-light;
+    border-right: $color-gray-light 1px solid;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: content-box;
+    z-index: 9;
+    position: relative;
+
+    .header {
+      height: 38px;
+      padding-bottom: 40px;
+      box-sizing: content-box;
+      padding-left: $padding;
+      display: block;
+      position: relative;
+
+      img {
+        height: 38px;
+        display: block;
+        width: auto;
+      }
+
+      h3 {
+        margin: 0;
+        padding: 0;
+        font-weight: 100;
+        font-size: 12px;
+        position: absolute;
+        bottom: 20px;
+        color: $color-alt;
+        font-style: italic;
+      }
+    }
+
+    .menu {
+      position: sticky;
+      top: $padding;
+      max-height: calc(100vh - $padding * 2);
+      overflow: auto;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+        border-radius: 2px;
+        background: $color-gray-light;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $color-main;
+        border-radius: 2px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: $color-alt;
+      }
+
+      .category {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: $padding;
+
+        h2 {
+          font-size: 12px;
+          line-height: 18px;
+          color: $color-gray;
+          padding-left: $padding;
+          margin: 0 0 10px 0;
+          text-transform: uppercase;
+        }
+
+        a {
+          margin-bottom: 5px;
+          line-height: 22px;
+          display: inline-block;
+          padding: 8px $padding;
+          border-radius: $border-radius;
+          width: 100%;
+          transition:
+            background .1s $animation-swift,
+            color .1s $animation-swift
+          ;
+
+          &:hover {
+            background: $color-white;
+            color: $color-main;
+            transition:
+              background .3s $animation-swift,
+              color .3s $animation-swift
+            ;
+          }
+
+          &.active {
+            background: $color-main;
+            color: $color-white;
+          }
+
+          &:active {
+            color: #ae508d;
+            background: $color-gray-extra-light;
+            transition:
+              background .1s $animation-swift,
+              color .1s $animation-swift
+            ;
+          }
+        }
+      }
+    }
+
+    @include media-breakpoint-down(xl) {
+      left: -260px;
+      position: fixed;
+      transition: .3s $animation-swift;
+      box-shadow: 0 0 0 rgba(#fff, 0);
+      border-right: $color-gray-light 1px solid;
+      padding: 10px;
+      padding-right: 35px;
+
+      .header {
+        display: none;
+      }
+
+      &:active,
+      &:focus,
+      &:hover {
+        left: 0;
+        box-shadow: $box-shadow;
+        border-right: $color-gray-light 1px solid;
+        overflow: auto;
+        padding-right: 10px;
+      }
+    }
+  }
+
+  .container {
+    padding: $padding-vertical 10px $padding-vertical 40px;
+    flex: 1;
+
+    &-content {
+      margin: 0 auto;
+      width: 100%;
+      max-width: map-get($grid-breakpoints, xl);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+
+      &-article {
+        flex: 1;
+      }
+
+      &-aside {
+        width: 240px;
+        min-width: 240px;
+        flex: 0 0 240px;
+        padding-left: 40px;
+        box-sizing: content-box;
+
+        @include media-breakpoint-down(xxl) {
+          display: none;
+        }
+
+        &-nav {
+          box-shadow:
+            inset 1px 0 0 0 #fff,
+            inset 3px 0 0 0 $color-gray-light
+          ;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          max-height: 100vh;
+          top: $padding;
+          position: sticky;
+          overflow: auto;
+          padding-bottom: $padding;
+
+          &::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+            border-radius: 2px;
+            background: $color-gray-light;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: $color-main;
+            border-radius: 2px;
+          }
+
+          &::-webkit-scrollbar-thumb:hover {
+            background: $color-alt;
+          }
+        }
+
+        a {
+          line-height: 20px;
+          padding: 10px 15px;
+          font-size: $font-size-description;
+          display: block;
+          position: relative;
+          transition: .3s $animation-swift;
+
+          span {
+            font-size: 12px;
+            color: $color-gray;
+            font-family: $font-family-mono;
+          }
+
+          &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            height: 100%;
+            width: 5px;
+            background: $color-main;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            transform-origin: 0 110%;
+            transform: scaleY(0);
+          }
+
+          &:hover {
+            color: $color-alt;
+            box-shadow:
+              inset 1px 0 0 0 $color-gray-extra-light,
+              inset 3px 0 0 0 $color-alt
+            ;
+          }
+
+          &.active {
+            color: $color-main;
+            background: $color-gray-extra-light;
+            transition: .3s $animation-swift, background .3s $animation-swift .2s;
+
+            span {
+              color: $color-main;
+              font-weight: bold;
+            }
+
+            &:before {
+              transform: scaleY(1);
+              transform-origin: 0 -10%;
+            }
+          }
+
+          &:active {
+            color: $color-main;
+          }
+        }
+      }
+    }
+
+    @include media-breakpoint-down(xl) {
+      padding: $padding-vertical 20px $padding-vertical 50px;
+      &-content-article {
+        margin: 0 auto;
+        max-width: map-get($grid-breakpoints, md);
+      }
+    }
+  }
+}

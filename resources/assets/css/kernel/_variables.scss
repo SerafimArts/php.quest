@@ -1,0 +1,80 @@
+// -----------------------------------------------------------------------------
+//  Colors
+// -----------------------------------------------------------------------------
+
+$color-main:             #4f5b93 !default;
+$color-alt:              #7a86b8 !default;
+$color-text:             #2b2c32 !default;
+$color-white:            #fff    !default;
+
+$color-warning:          #ffb417 !default;
+$color-warning-bg:       #fffbf1 !default;
+$color-danger:           #ff5454 !default;
+$color-danger-bg:        #fef9f9 !default;
+
+$color-gray-extra-light: #f4f4f8 !default;
+$color-gray-light:       #dcdde1 !default;
+$color-gray:             #bbbdc4 !default;
+$color-gray-dark:        #8f929d !default;
+$color-gray-extra-dark:  #676c84 !default;
+
+// -----------------------------------------------------------------------------
+//  Font Size
+// -----------------------------------------------------------------------------
+
+$h1-size:                 3.052rem !default;
+$h1-height:               3.052rem !default;
+$h2-size:                 2.441rem !default;
+$h2-height:               2.441rem !default;
+$h3-size:                 1.953rem !default;
+$h3-height:               1.953rem !default;
+$h4-size:                 1.563rem !default;
+$h4-height:               1.563rem !default;
+$h5-size:                 1.25rem !default;
+$h6-size:                 1rem !default;
+
+$font-size:               16px !default;
+$font-height:             28px !default;
+$font-size-description:   0.9rem !default;
+$font-height-description: 1rem !default;
+
+// -----------------------------------------------------------------------------
+//  Main Sizes
+// -----------------------------------------------------------------------------
+
+$height:                 36px !default;
+$height-small:           28px !default;
+$padding:                15px !default;
+$margin:                 10px !default;
+$border-radius:          3px !default;
+
+// -----------------------------------------------------------------------------
+//  Common
+// -----------------------------------------------------------------------------
+
+$font-family:            'Nunito', 'Roboto', Helvetica, sans-serif !default;
+$font-family-headings:   $font-family !default;
+$font-family-mono:       'JetBrains Mono', Menlo, Monaco, Consolas, 'Courier New', monospace !default;
+
+$animation-swift:        cubic-bezier(.55, 0, .1, 1) !default;
+$animation-bounce:       cubic-bezier(.585, .22, .12, 1.355) !default;
+
+$box-shadow:             0 2px 12px rgba($color-text, .15) !default;
+$box-shadow-alt:         0 1px 3px rgba($color-text, .04) !default;
+
+@mixin font-fractions {
+  -moz-font-feature-settings: 'frac=1';
+  font-feature-settings:      'frac' 1;
+}
+
+@mixin font-ligatures {
+  -moz-font-feature-settings: 'kern=1,liga=1,calt=1';
+  font-feature-settings:      'kern' 1, 'liga' 1, 'calt' 1;
+}
+
+@mixin font-optimize {
+  @include font-ligatures;
+  text-rendering:          optimizeLegibility;
+  -webkit-font-smoothing:  antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

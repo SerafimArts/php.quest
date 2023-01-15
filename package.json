@@ -1,0 +1,33 @@
+{
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "devDependencies": {
+        "@babel/preset-flow": "^7.18",
+        "@symfony/webpack-encore": "^4.2",
+        "autoprefixer": "^10.4",
+        "core-js": "^3.27",
+        "file-loader": "6.0",
+        "postcss-loader": "^7.0",
+        "regenerator-runtime": "^0.13",
+        "sass": "^1.56",
+        "sass-loader": "^13.2",
+        "webpack-notifier": "^1.15"
+    },
+    "dependencies": {
+        "graphql": "^16.6",
+        "graphql-tag": "^2.12",
+        "knockout": "^3.5",
+        "reset-scss": "^1.0"
+    },
+    "browserslist": [
+        "> 0.5%",
+        "last 2 versions",
+        "Firefox ESR",
+        "not dead"
+    ]
+}

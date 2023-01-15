@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  php:
+    build: docker/php
+    container_name: php-quest-php
+    working_dir: /home/php.quest
+    volumes:
+      - ./:/home/php.quest
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - phpquest
+
+  nginx:
+    image: nginx:alpine
+    container_name: php-quest-nginx
+    working_dir: /home/php.quest
+    volumes:
+      - ./:/home/php.quest
+      - ./docker/nginx/php.quest.conf:/etc/nginx/conf.d/php.quest.conf
+      - ./docker/data/logs/nginx:/var/log/nginx/
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+    networks:
+      - phpquest
+
+networks:
+  phpquest:
+    name: phpquest
+    driver: bridge
+
+volumes:
+  postgres:
