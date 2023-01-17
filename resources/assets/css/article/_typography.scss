@@ -25,6 +25,14 @@ pre, code {
   white-space: pre;
 }
 
+em, i {
+  font-style: italic;
+}
+
+strong, b {
+  font-weight: bold;
+}
+
 code {
   background: $color-white;
   border-radius: 3px;
