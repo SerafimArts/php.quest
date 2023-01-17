@@ -24,7 +24,6 @@ final class SystemController
     public function ping(Request $request): Response
     {
         return new JsonResponse([
-            'request' => $request->getContent(),
             'response' => 'PING',
         ]);
     }
@@ -42,13 +41,13 @@ final class SystemController
             $this->command->execute($input, $output);
         } catch (\Throwable $e) {
             return new JsonResponse([
-                'request' => $request->getContent(),
+                'error' => true,
                 'status' => $e->getMessage(),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         return new JsonResponse([
-            'request' => $request->getContent(),
+            'error' => false,
             'status' => \explode("\n", $output->fetch()),
         ]);
     }
