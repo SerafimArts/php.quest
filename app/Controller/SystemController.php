@@ -20,10 +20,13 @@ final class SystemController
     ) {
     }
 
-    #[Route(path: 'update', methods: 'GET')]
+    #[Route(path: 'update', methods: 'GET', priority: 1)]
     public function ping(Request $request): Response
     {
-        return new Response($request->getContent());
+        return new JsonResponse([
+            'request' => $request->getContent(),
+            'response' => 'PING',
+        ]);
     }
 
     #[Route(path: 'update', methods: 'POST')]

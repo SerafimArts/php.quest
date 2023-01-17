@@ -18,6 +18,7 @@ services:
     public: true
 
   App\Controller\SystemController:
+    public: true
     arguments:
       - '%github_hook_secret%'
 
