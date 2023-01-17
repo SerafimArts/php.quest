@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Command\DocsUpdateCommand;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,8 +20,14 @@ final class SystemController
     ) {
     }
 
-    #[Route(path: 'update', methods: ['POST'])]
-    public function update(): Response
+    #[Route(path: 'update', methods: 'GET')]
+    public function ping(Request $request): Response
+    {
+        return new Response($request->getContent());
+    }
+
+    #[Route(path: 'update', methods: 'POST')]
+    public function update(Request $request): Response
     {
         $input = new ArgvInput();
         $input->setInteractive(false);
@@ -30,6 +37,9 @@ final class SystemController
 
         $this->command->execute($input, $output);
 
-        return new Response($output->fetch());
+        return new JsonResponse([
+            'request' => $request->getContent(),
+            'status' => \explode("\n", $output->fetch()),
+        ]);
     }
 }
