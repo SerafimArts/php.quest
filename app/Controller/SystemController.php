@@ -38,7 +38,14 @@ final class SystemController
         $output = new BufferedOutput();
         $output->setDecorated(false);
 
-        $this->command->execute($input, $output);
+        try {
+            $this->command->execute($input, $output);
+        } catch (\Throwable $e) {
+            return new JsonResponse([
+                'request' => $request->getContent(),
+                'status' => $e->getMessage(),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
 
         return new JsonResponse([
             'request' => $request->getContent(),
