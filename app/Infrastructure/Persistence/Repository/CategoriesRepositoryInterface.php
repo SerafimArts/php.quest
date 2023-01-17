@@ -12,4 +12,8 @@ use Doctrine\Persistence\ObjectRepository;
  */
 interface CategoriesRepositoryInterface extends ObjectRepository
 {
+    /**
+     * @return Category|null
+     */
+    public function findDefault(): ?Category;
 }

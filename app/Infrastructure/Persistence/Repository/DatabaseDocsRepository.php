@@ -17,6 +17,16 @@ final class DatabaseDocsRepository extends ServiceEntityRepository implements Do
     }
 
     /**
+     * @param non-empty-string $filename
+     *
+     * @return Documentation|null
+     */
+    public function findByFilename(string $filename): ?Documentation
+    {
+        return $this->findOneBy(['filename' => $filename]);
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function findById(DocumentationId $id): ?Documentation

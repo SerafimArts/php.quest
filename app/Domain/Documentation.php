@@ -11,8 +11,11 @@ use App\Domain\Shared\EntityInterface;
 use App\Infrastructure\Persistence\Doctrine\Generator\UuidGenerator;
 use App\Infrastructure\Persistence\Repository\DatabaseCategoriesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Psr\Clock\ClockInterface;
 
-#[ORM\Entity(DatabaseCategoriesRepository::class), ORM\Table(name: 'docs')]
+#[ORM\Entity(DatabaseCategoriesRepository::class), ORM\Table(name: 'docs', uniqueConstraints: [
+    new ORM\UniqueConstraint('file_idx', ['filename'])
+])]
 class Documentation implements
     EntityInterface,
     SluggableInterface,
@@ -61,20 +64,34 @@ class Documentation implements
     private ContentInterface $content;
 
     /**
+     * @var string
+     */
+    #[ORM\Column(type: 'string', options: ['default' => ''])]
+    private string $filename = '';
+
+    /**
+     * @var \DateTimeImmutable|null
+     */
+    #[ORM\Column(name: 'deleted_at', type: 'datetimetz_immutable', nullable: true)]
+    private ?\DateTimeImmutable $deletedAt = null;
+
+    /**
+     * @param Category $category
      * @param non-empty-string $title
      * @param string $content
-     * @param Menu|null $menu
      * @param DocumentationId|null $id
      */
     public function __construct(
         Category $category,
         string $title,
-        string $content = '',
+        string|ContentInterface $content = '',
+        string $filename = '',
         DocumentationId $id = null,
     ) {
         $this->category = $category;
         $this->title = $title;
-        $this->content = Content::raw($content);
+        $this->filename = $filename;
+        $this->content = $content instanceof ContentInterface ? $content : Content::raw($content);
         $this->id = $id ?? DocumentationId::fromNamespace(static::class);
     }
 
@@ -132,5 +149,47 @@ class Documentation implements
     public function getCategory(): Category
     {
         return $this->category;
+    }
+
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    public function deletedAt(): ?\DateTimeImmutable
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDeleted(): bool
+    {
+        return $this->deletedAt !== null;
+    }
+
+    /**
+     * @return void
+     */
+    public function restore(): void
+    {
+        $this->deletedAt = null;
+    }
+
+    /**
+     * @param \DateTimeInterface|ClockInterface $at
+     *
+     * @return void
+     */
+    public function delete(\DateTimeInterface|ClockInterface $at): void
+    {
+        if ($at instanceof ClockInterface) {
+            $at = $at->now();
+        }
+
+        if ($at instanceof \DateTime) {
+            $at = \DateTimeImmutable::createFromMutable($at);
+        }
+
+        $this->deletedAt = clone $at;
     }
 }

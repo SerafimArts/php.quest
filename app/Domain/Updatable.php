@@ -17,7 +17,7 @@ trait Updatable
      * @var \DateTimeImmutable|null
      */
     #[ORM\Column(name: 'updated_at', type: 'datetimetz_immutable', nullable: true)]
-    private \DateTimeImmutable|null $updatedAt = null;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * {@inheritDoc}

@@ -16,6 +16,13 @@ use Doctrine\Persistence\ObjectRepository;
 interface DocsRepositoryInterface extends ObjectRepository
 {
     /**
+     * @param non-empty-string $filename
+     *
+     * @return Documentation|null
+     */
+    public function findByFilename(string $filename): ?Documentation;
+
+    /**
      * @param DocumentationId $id
      *
      * @return Documentation|null

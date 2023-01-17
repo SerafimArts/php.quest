@@ -1,4 +1,5 @@
 parameters:
+  github_hook_secret: '%env(resolve:GITHUB_HOOK_SECRET)%'
 
 imports:
   - { resource: services/*.yaml }
@@ -15,6 +16,10 @@ services:
   App\Controller\:
     resource: '../app/Controller'
     public: true
+
+  App\Controller\SystemController:
+    arguments:
+      - '%github_hook_secret%'
 
   # ----------------------------------------------------------------------------
   #  Symfony PSR-20 Clock

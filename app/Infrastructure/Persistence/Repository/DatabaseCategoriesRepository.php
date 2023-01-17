@@ -15,6 +15,19 @@ final class DatabaseCategoriesRepository extends ServiceEntityRepository impleme
         parent::__construct($registry, Category::class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function findDefault(): ?Category
+    {
+        return $this->findOneBy([], [
+            'priority' => 'DESC'
+        ]);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function findAll(): iterable
     {
         return parent::findBy([], [

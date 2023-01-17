@@ -27,7 +27,7 @@ class Content implements PrerenderedContentInterface
      * @param string $source
      * @param string|null $rendered
      */
-    protected function __construct(string $source, string $rendered = null)
+    public function __construct(string $source, string $rendered = null)
     {
         $this->source = $source;
         $this->rendered = $rendered;

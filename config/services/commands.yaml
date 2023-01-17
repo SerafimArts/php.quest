@@ -10,3 +10,9 @@ services:
   App\Command\DocsPrerenderCommand:
     arguments:
       - '@Local\ContentRenderer\Renderer\DocumentationRenderer'
+
+  App\Command\DocsUpdateCommand:
+    arguments:
+      $temp: '%kernel.cache_dir%'
+      $public: '%kernel.project_dir%/public'
+      $renderer: '@Local\ContentRenderer\Renderer\DocumentationRenderer'
