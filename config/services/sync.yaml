@@ -1,0 +1,29 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Infrastructure\Sync\ArchiveDownloader:
+    arguments:
+      $temp: '%kernel.cache_dir%'
+
+  App\Infrastructure\Sync\ArchiveExtractor:
+    arguments:
+      $temp: '%kernel.cache_dir%'
+
+  App\Infrastructure\Sync\DocumentCreator: ~
+
+  App\Infrastructure\Sync\DocumentUpdater: ~
+
+  App\Infrastructure\Sync\Pipeline:
+    arguments:
+      $url: 'https://github.com/SerafimArts/php.quest-docs/archive/refs/heads/master.zip'
+      $directory: 'php.quest-docs-master'
+
+  App\Infrastructure\Sync\Synchronizer:
+    arguments:
+      $public: '%kernel.project_dir%/public'
+
+
+

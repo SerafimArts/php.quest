@@ -4,7 +4,9 @@
     {{ page.title }}
 {% endblock %}
 
+
 {% block body %}
+    {# page \App\Domain\Documentation #}
     <main itemscope itemtype="https://schema.org/WebPage" class="documentation">
         {% include "partials/menu.html.twig" %}
 
@@ -12,6 +14,7 @@
             <div class="container-content" data-vm="DocumentationViewModel">
 
                 <article class="container-content-article article">
+                    {# menu \App\Domain\Category #}
                     {% set menu = page.getCategory() %}
                     {% if menu is not null %}
                         <div class="breadcrumbs">
