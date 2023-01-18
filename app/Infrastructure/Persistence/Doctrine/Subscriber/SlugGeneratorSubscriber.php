@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Subscriber;
 
-use App\Domain\SluggableInterface;
+use App\Domain\UrlProviderInterface;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -36,10 +36,10 @@ final readonly class SlugGeneratorSubscriber implements EventSubscriberInterface
     {
         $target = $event->getObject();
 
-        if ($target instanceof SluggableInterface) {
+        if ($target instanceof UrlProviderInterface) {
             $slug = $this->slugger->slug($target->getTitle());
 
-            $target->setSlug((string)$slug->lower());
+            $target->setUrl((string)$slug->lower());
         }
     }
 

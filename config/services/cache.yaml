@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Psr\SimpleCache\CacheInterface:
+    class: Symfony\Component\Cache\Psr16Cache
+    arguments:
+      - '@cache.app'

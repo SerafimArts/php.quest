@@ -10,8 +10,8 @@
                 <h2>{{ category.title }}</h2>
                 {% for page in category.pages %}
                     {% if not page.isDeleted %}
-                        {% set active = app.request.attributes.get('_route_params').urn == page.slug %}
-                        <a href="/{{ page.slug }}" class="{{ active ? 'active' : '' }}">{{ page.title }}</a>
+                        {% set active = app.request.attributes.get('_route_params').url == page.url %}
+                        <a href="/{{ page.url }}" class="{{ active ? 'active' : '' }}">{{ page.title }}</a>
                     {% endif %}
                 {% endfor %}
             </nav>

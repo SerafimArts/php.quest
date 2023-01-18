@@ -12,9 +12,9 @@ services:
     arguments:
       $temp: '%kernel.cache_dir%'
 
-  App\Infrastructure\Sync\DocumentCreator: ~
+  App\Infrastructure\Sync\PageCreator: ~
 
-  App\Infrastructure\Sync\DocumentUpdater:
+  App\Infrastructure\Sync\PageUpdater:
     arguments:
       $renderer: '@Local\ContentRenderer\Renderer\DocumentationRenderer'
 

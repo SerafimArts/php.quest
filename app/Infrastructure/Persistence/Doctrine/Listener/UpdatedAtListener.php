@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Listener;
 
-use App\Domain\UpdatableInterface;
+use App\Domain\UpdatedDateProviderInterface;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Psr\Clock\ClockInterface;
 
 /**
- * Each object that implements the {@see UpdatableInterface} interface before
+ * Each object that implements the {@see UpdatedDateProviderInterface} interface before
  * UPDATE data in the database will also update its update date using the system
  * date returned from the interface's {@see ClockInterface} implementation.
  */
@@ -24,7 +24,7 @@ final readonly class UpdatedAtListener
     {
         $target = $event->getObject();
 
-        if ($target instanceof UpdatableInterface) {
+        if ($target instanceof UpdatedDateProviderInterface) {
             $target->touch($this->clock->now());
         }
     }

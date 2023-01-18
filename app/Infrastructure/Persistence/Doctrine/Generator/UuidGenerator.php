@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\Doctrine\Generator;
 
 use App\Domain\Shared\IdentifiableInterface;
-use App\Domain\Shared\UuidIdentifier;
 use App\Domain\Shared\IdInterface;
+use App\Domain\Shared\UuidIdentifier;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Id\AbstractIdGenerator;
 use Psr\Clock\ClockInterface;

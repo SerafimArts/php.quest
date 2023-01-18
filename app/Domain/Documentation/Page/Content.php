@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Documentation;
+namespace App\Domain\Documentation\Page;
 
 use Doctrine\ORM\Mapping as ORM;
 use Local\ContentRenderer\ContentRendererInterface;
 use Local\ContentRenderer\ResultInterface;
 
 #[ORM\Embeddable]
-class Content implements PrerenderedContentInterface
+class Content implements RenderableContentInterface
 {
     /**
      * @var string

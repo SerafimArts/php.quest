@@ -2,26 +2,32 @@
 
 declare(strict_types=1);
 
-namespace App\Domain;
+namespace App\Domain\Documentation;
 
-use App\Domain\Documentation\Content;
-use App\Domain\Documentation\ContentInterface;
-use App\Domain\Shared\DocumentationId;
+use App\Domain\Creatable;
+use App\Domain\CreatedDateProviderInterface;
+use App\Domain\Documentation\Page\Content;
+use App\Domain\Documentation\Page\ContentInterface;
+use App\Domain\Shared\Documentation\PageId;
 use App\Domain\Shared\EntityInterface;
+use App\Domain\Updatable;
+use App\Domain\UpdatedDateProviderInterface;
+use App\Domain\UrlProviderInterface;
 use App\Infrastructure\Persistence\Doctrine\Generator\UuidGenerator;
-use App\Infrastructure\Persistence\Repository\DatabaseCategoriesRepository;
+use App\Infrastructure\Persistence\Repository\Documentation\DatabaseCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Psr\Clock\ClockInterface;
+use Psr\Http\Message\UriInterface;
 
-#[ORM\Entity(DatabaseCategoriesRepository::class), ORM\Table(name: 'docs', uniqueConstraints: [
+#[ORM\Entity(DatabaseCategoryRepository::class), ORM\Table(name: 'docs', uniqueConstraints: [
     new ORM\UniqueConstraint('file_idx', ['filename'])
 ])]
-class Documentation implements
+class Page implements
     EntityInterface,
-    SluggableInterface,
-    ProvidesContentInterface,
-    CreatableInterface,
-    UpdatableInterface
+    UrlProviderInterface,
+    ContentProviderInterface,
+    CreatedDateProviderInterface,
+    UpdatedDateProviderInterface
 {
     use Creatable;
     use Updatable;
@@ -29,8 +35,8 @@ class Documentation implements
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
-    #[ORM\Column(type: DocumentationId::class)]
-    private DocumentationId $id;
+    #[ORM\Column(type: PageId::class)]
+    private PageId $id;
 
     /**
      * @var non-empty-string
@@ -79,26 +85,26 @@ class Documentation implements
      * @param Category $category
      * @param non-empty-string $title
      * @param string $content
-     * @param DocumentationId|null $id
+     * @param PageId|null $id
      */
     public function __construct(
         Category $category,
         string $title,
         string|ContentInterface $content = '',
         string $filename = '',
-        DocumentationId $id = null,
+        PageId $id = null,
     ) {
         $this->category = $category;
         $this->title = $title;
         $this->filename = $filename;
         $this->content = $content instanceof ContentInterface ? $content : Content::raw($content);
-        $this->id = $id ?? DocumentationId::fromNamespace(static::class);
+        $this->id = $id ?? PageId::fromNamespace(static::class);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getId(): DocumentationId
+    public function getId(): PageId
     {
         return $this->id;
     }
@@ -130,7 +136,7 @@ class Documentation implements
     /**
      * {@inheritDoc}
      */
-    public function getSlug(): string
+    public function getUrl(): string
     {
         return $this->slug;
     }
@@ -138,9 +144,13 @@ class Documentation implements
     /**
      * {@inheritDoc}
      */
-    public function setSlug(string $slug): void
+    public function setUrl(string|UriInterface|\Stringable $url): void
     {
-        $this->slug = $slug;
+        $this->slug = match (true) {
+            \is_string($url) => $url,
+            $url instanceof UriInterface => \trim($url->getPath(), '/'),
+            default => (string)$url,
+        };
     }
 
     /**

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Psr\Clock\ClockInterface;
 
 /**
- * @mixin CreatableInterface
+ * @mixin CreatedDateProviderInterface
  * @psalm-require-implements CreatableInterface
  */
 trait Creatable

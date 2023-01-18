@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Subscriber;
 
-use App\Domain\Documentation\PrerenderedContentInterface;
-use App\Domain\ProvidesContentInterface;
+use App\Domain\Documentation\ContentProviderInterface;
+use App\Domain\Documentation\Page\RenderableContentInterface;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -34,10 +34,10 @@ final readonly class ContentRenderSubscriber implements EventSubscriberInterface
 
     private function render(object $entity): void
     {
-        if ($entity instanceof ProvidesContentInterface) {
+        if ($entity instanceof ContentProviderInterface) {
             $content = $entity->getContent();
 
-            if ($content instanceof PrerenderedContentInterface && !$content->isRendered()) {
+            if ($content instanceof RenderableContentInterface && !$content->isRendered()) {
                 $content->render($this->renderer);
             }
         }

@@ -10,7 +10,7 @@ use Psr\Clock\ClockInterface;
  * Each object that contains this interface supports the ability to obtain
  * information about the creation date of this object in the database.
  */
-interface CreatableInterface
+interface CreatedDateProviderInterface
 {
     /**
      * Returns the creation date of the object.

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Documentation;
+namespace App\Domain\Documentation\Page;
 
 use Local\ContentRenderer\ContentRendererInterface;
 use Local\ContentRenderer\ResultInterface;
 
-interface PrerenderedContentInterface extends ContentInterface
+interface RenderableContentInterface extends ContentInterface
 {
     /**
      * @param ContentRendererInterface $renderer

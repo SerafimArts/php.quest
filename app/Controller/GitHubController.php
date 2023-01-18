@@ -9,14 +9,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class SystemController
+final class GitHubController
 {
     public function __construct(
         private readonly Pipeline $pipeline,
     ) {
     }
 
-    #[Route(path: 'update', methods: 'GET', priority: 1)]
+    #[Route(path: 'update', methods: 'GET')]
     public function ping(): Response
     {
         return new JsonResponse(['response' => 'PING']);

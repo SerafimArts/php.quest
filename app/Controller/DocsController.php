@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Domain\Documentation;
-use App\Infrastructure\Persistence\Repository\DocsRepositoryInterface;
+use App\Infrastructure\Persistence\Repository\Documentation\PageRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -19,7 +18,7 @@ final readonly class DocsController
      */
     public function __construct(
         private Environment $twig,
-        private DocsRepositoryInterface $docs,
+        private PageRepositoryInterface $docs,
     ) {
     }
 
@@ -35,20 +34,15 @@ final readonly class DocsController
         return new RedirectResponse('/' . $page->getSlug());
     }
 
-    #[Route(path: '/{urn}', name: 'show', methods: 'GET')]
-    public function show(string $urn): Response
+    #[Route(path: '/{url}', name: 'show', methods: 'GET', priority: -1)]
+    public function show(string $url): Response
     {
-        $page = $this->docs->findOneBy(['slug' => $urn]);
+        $page = $this->docs->findByUrl($url);
 
         if ($page === null) {
             throw new NotFoundHttpException('Not Found');
         }
 
-        return $this->response($page);
-    }
-
-    private function response(Documentation $page): Response
-    {
         $view = $this->twig->render('page/docs/show.html.twig', [
             'page' => $page,
         ]);

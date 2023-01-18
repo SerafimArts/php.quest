@@ -11,7 +11,7 @@ use Psr\Clock\ClockInterface;
  * information about the date of the last update of this object after saving
  * it to the database.
  */
-interface UpdatableInterface
+interface UpdatedDateProviderInterface
 {
     /**
      * Returns the date the object was last updated. Returns {@see null} if the

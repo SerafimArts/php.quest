@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Psr\Clock\ClockInterface;
 
 /**
- * @mixin UpdatableInterface
+ * @mixin UpdatedDateProviderInterface
  * @psalm-require-implements UpdatableInterface
  */
 trait Updatable

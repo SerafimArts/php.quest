@@ -8,8 +8,8 @@ doctrine:
       # Custom
       uuid: Ramsey\Uuid\Doctrine\UuidType
       # Identifiers
-      App\Domain\Shared\CategoryId: App\Infrastructure\Persistence\Doctrine\Types\CategoryIdType
-      App\Domain\Shared\DocumentationId: App\Infrastructure\Persistence\Doctrine\Types\DocumentationIdType
+      App\Domain\Shared\Documentation\CategoryId: App\Infrastructure\Persistence\Doctrine\Types\Documentation\CategoryIdType
+      App\Domain\Shared\Documentation\PageId: App\Infrastructure\Persistence\Doctrine\Types\Documentation\PageIdType
 
   orm:
     auto_generate_proxy_classes: true

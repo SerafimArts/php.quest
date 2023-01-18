@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Sync;
 
-use App\Domain\Documentation;
-use App\Infrastructure\Persistence\Repository\CategoriesRepositoryInterface;
+use App\Domain\Documentation\Page;
+use App\Infrastructure\Persistence\Repository\Documentation\CategoryRepositoryInterface;
 use Local\ContentRenderer\ResultInterface;
 use Symfony\Component\Finder\SplFileInfo;
 
-final class DocumentCreator
+final class PageCreator
 {
     public function __construct(
-        private readonly CategoriesRepositoryInterface $categories,
+        private readonly CategoryRepositoryInterface $categories,
     ) {
     }
 
-    public function create(SplFileInfo $file, ResultInterface $result): Documentation
+    public function create(SplFileInfo $file, ResultInterface $result): Page
     {
         $category = $this->categories->findDefault() ?? throw new \LogicException(
             'Cannot find default Category for new document'
         );
 
-        return new Documentation(
+        return new Page(
             category: $category,
             title: $this->getTitle($result),
             filename: $file->getRelativePathname(),

@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Types;
+namespace App\Infrastructure\Persistence\Doctrine\Types\Documentation;
 
-use App\Domain\Shared\CategoryId;
+use App\Domain\Shared\Documentation\CategoryId;
+use App\Infrastructure\Persistence\Doctrine\Types\UuidType;
 
 final class CategoryIdType extends UuidType
 {

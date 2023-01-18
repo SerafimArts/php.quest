@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\View\Twig\Service;
 
-use App\Domain\Category;
-use App\Infrastructure\Persistence\Repository\CategoriesRepositoryInterface;
+use App\Domain\Documentation\Category;
+use App\Infrastructure\Persistence\Repository\Documentation\CategoryRepositoryInterface;
 
 final readonly class PageCategoriesService
 {
     public function __construct(
-        private CategoriesRepositoryInterface $categories,
+        private CategoryRepositoryInterface $categories,
     ) {
     }
 

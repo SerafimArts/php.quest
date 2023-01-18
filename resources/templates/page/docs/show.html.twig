@@ -6,7 +6,7 @@
 
 
 {% block body %}
-    {# page \App\Domain\Documentation #}
+    {# page \App\Domain\Documentation\Documentation #}
     <main itemscope itemtype="https://schema.org/WebPage" class="documentation">
         {% include "partials/menu.html.twig" %}
 
@@ -14,7 +14,7 @@
             <div class="container-content" data-vm="DocumentationViewModel">
 
                 <article class="container-content-article article">
-                    {# menu \App\Domain\Category #}
+                    {# menu \App\Domain\Documentation\Category #}
                     {% set menu = page.getCategory() %}
                     {% if menu is not null %}
                         <div class="breadcrumbs">

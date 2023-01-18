@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Repository;
+namespace App\Infrastructure\Persistence\Repository\Documentation;
 
-use App\Domain\Category;
+use App\Domain\Documentation\Category;
 use Doctrine\Persistence\ObjectRepository;
 
 /**
  * @template-extends ObjectRepository<Category>
  */
-interface CategoriesRepositoryInterface extends ObjectRepository
+interface CategoryRepositoryInterface extends ObjectRepository
 {
     /**
      * @return Category|null

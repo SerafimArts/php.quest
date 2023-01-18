@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Domain;
+namespace App\Domain\Documentation;
 
-use App\Domain\Shared\CategoryId;
+use App\Domain\NameProviderInterface;
+use App\Domain\Shared\Documentation\CategoryId;
 use App\Domain\Shared\EntityInterface;
 use App\Infrastructure\Persistence\Doctrine\Generator\UuidGenerator;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity, ORM\Table(name: 'categories')]
 class Category implements
     EntityInterface,
-    NameableInterface
+    NameProviderInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
@@ -35,9 +36,9 @@ class Category implements
     private int $priority;
 
     /**
-     * @var Collection<Documentation>
+     * @var Collection<Page>
      */
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Documentation::class, fetch: 'EAGER')]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Page::class, fetch: 'EAGER')]
     #[ORM\OrderBy(['priority' => 'DESC'])]
     private Collection $pages;
 
@@ -66,7 +67,7 @@ class Category implements
     }
 
     /**
-     * @return iterable<Documentation>
+     * @return iterable<Page>
      */
     public function getPages(): iterable
     {

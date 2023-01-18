@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain;
 
-interface RenamableInterface
+interface NameUpdaterInterface
 {
     /**
      * @param non-empty-string $title

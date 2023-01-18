@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Documentation;
+namespace App\Domain\Documentation\Page;
 
 interface ContentInterface extends \Stringable
 {

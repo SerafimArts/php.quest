@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Domain;
+namespace App\Domain\Documentation;
 
-use App\Domain\Documentation\ContentInterface;
+use App\Domain\Documentation\Page\ContentInterface;
 
-interface ProvidesContentInterface
+interface ContentProviderInterface
 {
     /**
      * @return ContentInterface

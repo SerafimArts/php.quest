@@ -17,6 +17,11 @@ services:
     resource: '../app/Controller'
     public: true
 
+  App\Controller\GraphQLController:
+    public: true
+    arguments:
+      $debug: '%kernel.debug%'
+
   # ----------------------------------------------------------------------------
   #  Symfony PSR-20 Clock
   # ----------------------------------------------------------------------------
