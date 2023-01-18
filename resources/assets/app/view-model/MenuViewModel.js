@@ -44,6 +44,8 @@ export default class MenuViewModel {
 
             this.page.current(response);
 
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
             menu.active(true);
         } finally {
             this.loading = false;
