@@ -14,7 +14,9 @@ services:
 
   App\Infrastructure\Sync\DocumentCreator: ~
 
-  App\Infrastructure\Sync\DocumentUpdater: ~
+  App\Infrastructure\Sync\DocumentUpdater:
+    arguments:
+      $renderer: '@Local\ContentRenderer\Renderer\DocumentationRenderer'
 
   App\Infrastructure\Sync\Pipeline:
     arguments:
