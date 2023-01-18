@@ -17,11 +17,6 @@ services:
     resource: '../app/Controller'
     public: true
 
-  App\Controller\SystemController:
-    public: true
-    arguments:
-      - '%github_hook_secret%'
-
   # ----------------------------------------------------------------------------
   #  Symfony PSR-20 Clock
   # ----------------------------------------------------------------------------
