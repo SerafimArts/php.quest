@@ -17,12 +17,12 @@ use App\Domain\UpdatedDateProviderInterface;
 use App\Domain\UrlProviderInterface;
 use App\Domain\UrlUpdaterInterface;
 use App\Infrastructure\Persistence\Doctrine\Generator\UuidGenerator;
-use App\Infrastructure\Persistence\Repository\Documentation\DatabaseCategoryRepository;
+use App\Infrastructure\Persistence\Repository\Documentation\DatabaseCategoriesRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Psr\Clock\ClockInterface;
 use Psr\Http\Message\UriInterface;
 
-#[ORM\Entity(DatabaseCategoryRepository::class), ORM\Table(name: 'docs')]
+#[ORM\Entity(DatabaseCategoriesRepository::class), ORM\Table(name: 'docs')]
 class Page implements
     EntityInterface,
     NameProviderInterface,

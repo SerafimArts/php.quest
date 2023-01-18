@@ -96,6 +96,7 @@
           padding: 8px $padding;
           border-radius: $border-radius;
           width: 100%;
+          position: relative;
           transition:
             background .1s $animation-swift,
             color .1s $animation-swift
@@ -113,6 +114,36 @@
           &.active {
             background: $color-main;
             color: $color-white;
+          }
+
+          &.loading {
+            pointer-events: none;
+            cursor: default;
+
+            &:before {
+              content: '';
+              background: rgba(#fff, .7);
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              border-radius: 2px;
+            }
+
+            &:after {
+              content: '';
+              position: absolute;
+              width: 16px;
+              height: 16px;
+              border: transparent 2px solid;
+              border-left: $color-main 2px solid;
+              border-radius: 50%;
+              animation: rotation .5s linear infinite;
+              right: 15px;
+              top: 50%;
+              margin-top: -10px;
+            }
           }
 
           &:active {
@@ -276,5 +307,14 @@
         max-width: map-get($grid-breakpoints, md);
       }
     }
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

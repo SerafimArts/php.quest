@@ -8,11 +8,11 @@ services:
   #  Repositories
   # ----------------------------------------------------------------------------
 
-  App\Infrastructure\Persistence\Repository\Documentation\CategoryRepositoryInterface:
-    class: App\Infrastructure\Persistence\Repository\Documentation\DatabaseCategoryRepository
+  App\Domain\Documentation\CategoriesRepositoryInterface:
+    class: App\Infrastructure\Persistence\Repository\Documentation\DatabaseCategoriesRepository
 
-  App\Infrastructure\Persistence\Repository\Documentation\PageRepositoryInterface:
-    class: App\Infrastructure\Persistence\Repository\Documentation\DatabasePageRepository
+  App\Domain\Documentation\PagesRepositoryInterface:
+    class: App\Infrastructure\Persistence\Repository\Documentation\DatabasePagesRepository
 
   # ----------------------------------------------------------------------------
   #  Listeners

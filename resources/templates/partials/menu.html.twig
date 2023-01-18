@@ -1,20 +1,36 @@
-<section class="aside">
+<script type="text/html" style="display: none;" id="category">
+    <nav class="category">
+        <h2 data-bind="text: title">...</h2>
+        <div data-bind="foreach: menu">
+            <a href="#" data-bind="
+                css: { active: active, loading: loading },
+                text: title,
+                click: $root.menu.select.bind($root.menu),
+            ">...</a>
+        </div>
+    </nav>
+</script>
+
+<section class="aside" data-id="menu">
     <a href="/" class="header">
         <img src="{{ asset('dist/images/logo.png') }}" height="38" alt="logo" />
         <h3>Без регистрации и СМС</h3>
     </a>
 
     <aside class="menu">
-        {% for category in categories.all() %}
-            <nav class="category">
-                <h2>{{ category.title }}</h2>
-                {% for page in category.pages %}
-                    {% if not page.isDeleted %}
-                        {% set active = app.request.attributes.get('_route_params').url == page.url %}
-                        <a href="/{{ page.url }}" class="{{ active ? 'active' : '' }}">{{ page.title }}</a>
-                    {% endif %}
-                {% endfor %}
-            </nav>
-        {% endfor %}
+        <section data-bind="template: { name: 'category', foreach: menu.categories }">
+            {% for category in categories.all() %}
+                <nav class="category" data-id="category">
+                    <h2 data-id="title">{{ category.title }}</h2>
+                    {% for page in category.pages %}
+                        {% if not page.isDeleted %}
+                            {% set active = app.request.attributes.get('_route_params').url == page.url %}
+                            <a href="/{{ page.url }}" data-link="{{ page.id }}"
+                               class="{{ active ? 'active' : '' }}">{{ page.title }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </nav>
+            {% endfor %}
+        </section>
     </aside>
 </section>

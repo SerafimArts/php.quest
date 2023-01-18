@@ -7,35 +7,45 @@
 
 {% block body %}
     {# page \App\Domain\Documentation\Documentation #}
-    <main itemscope itemtype="https://schema.org/WebPage" class="documentation">
+    <main itemscope itemtype="https://schema.org/WebPage" class="documentation" data-vm="LayoutViewModel">
         {% include "partials/menu.html.twig" %}
 
         <section class="container">
-            <div class="container-content" data-vm="DocumentationViewModel">
-
+            <div class="container-content" data-bind="with: page" data-id="page">
                 <article class="container-content-article article">
                     {# menu \App\Domain\Documentation\Category #}
                     {% set menu = page.getCategory() %}
                     {% if menu is not null %}
                         <div class="breadcrumbs">
-                            <span class="item">{{ menu.title }}</span>
-                            <span class="item">{{ page.title }}</span>
+                            <!--ko if: current-->
+                                <span class="item" data-bind="text: current().category.title"></span>
+                                <span class="item" data-bind="text: current().title"></span>
+                            <!--/ko-->
+                            <!--ko ifnot: current-->
+                                <span class="item">{{ menu.title }}</span>
+                                <span class="item">{{ page.title }}</span>
+                            <!--/ko-->
                         </div>
                     {% endif %}
-                    {{ page.content|raw }}
+
+                    <!--ko if: current-->
+                        <div data-bind="html: current().content"></div>
+                    <!--/ko-->
+                    <!--ko ifnot: current-->
+                        {{ page.content|raw }}
+                    <!--/ko-->
                 </article>
 
                 <!--ko if: anchors().length > 1 -->
                 <aside class="container-content-aside">
                     <nav class="container-content-aside-nav" data-bind="foreach: anchors">
-                        <a href="#" data-bind="attr: { href: '#' + slug }, css: { active: active }">
+                        <a href="#" data-bind="attr: { href: anchor }, css: { active: active }">
                             <span data-bind="text: $index().toString().padStart(2, '0') + '.'"></span>
                             <!--ko text: title--><!--/ko-->
                         </a>
                     </nav>
                 </aside>
                 <!--/ko-->
-
             </div>
         </section>
     </main>

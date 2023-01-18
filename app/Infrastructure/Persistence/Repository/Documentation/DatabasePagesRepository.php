@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\Repository\Documentation;
 
 use App\Domain\Documentation\Page;
+use App\Domain\Documentation\PagesRepositoryInterface;
 use App\Domain\Shared\Documentation\PageId;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-final class DatabasePageRepository extends ServiceEntityRepository implements PageRepositoryInterface
+final class DatabasePagesRepository extends ServiceEntityRepository implements PagesRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -29,7 +30,7 @@ final class DatabasePageRepository extends ServiceEntityRepository implements Pa
      */
     public function findByUrl(string $url): ?Page
     {
-        return $this->findOneBy(['slug' => \strtolower($url)]);
+        return $this->findOneBy(['url' => \strtolower($url)]);
     }
 
     /**

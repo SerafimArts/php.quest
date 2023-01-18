@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Http;
 
 use GraphQL\Error\DebugFlag;
 use GraphQL\Error\Error;

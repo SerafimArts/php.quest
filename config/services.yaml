@@ -17,7 +17,7 @@ services:
     resource: '../app/Controller'
     public: true
 
-  App\Controller\GraphQLController:
+  App\Controller\Http\GraphQLController:
     public: true
     arguments:
       $debug: '%kernel.debug%'

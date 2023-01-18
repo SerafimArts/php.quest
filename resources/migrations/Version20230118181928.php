@@ -25,20 +25,21 @@ final class Version20230118181928 extends AbstractMigration
             category_id UUID DEFAULT NULL CONSTRAINT FK_51572BB712469DE2 REFERENCES categories,
             title VARCHAR(255) NOT NULL,
             url VARCHAR(255) NOT NULL,
+            filename VARCHAR(255) DEFAULT '' NOT NULL,
             priority SMALLINT UNSIGNED DEFAULT 0 NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-            updated_at DATETIME DEFAULT NULL,
             content_source CLOB NOT NULL,
             content_rendered CLOB DEFAULT NULL,
-            filename VARCHAR(255) DEFAULT '' NOT NULL
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+            updated_at DATETIME DEFAULT NULL,
+            deleted_at DATETIME DEFAULT NULL
         )
         SQL);
 
         $this->addSql(<<<'SQL'
         INSERT INTO docs_dg_tmp
-            (id, category_id, title, url, priority, created_at, updated_at, content_source, content_rendered, filename)
+            (id, category_id, title, url, priority, created_at, updated_at, deleted_at, content_source, content_rendered, filename)
         SELECT 
-            id, category_id, title, slug, priority, created_at, updated_at, content_source, content_rendered, filename
+            id, category_id, title, slug, priority, created_at, updated_at, deleted_at, content_source, content_rendered, filename
         FROM docs
         SQL);
 
@@ -63,20 +64,21 @@ final class Version20230118181928 extends AbstractMigration
             category_id UUID DEFAULT NULL CONSTRAINT FK_51572BB712469DE2 REFERENCES categories,
             title VARCHAR(255) NOT NULL,
             slug VARCHAR(255) NOT NULL,
+            filename VARCHAR(255) DEFAULT '' NOT NULL,
             priority SMALLINT UNSIGNED DEFAULT 0 NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-            updated_at DATETIME DEFAULT NULL,
             content_source CLOB NOT NULL,
             content_rendered CLOB DEFAULT NULL,
-            filename VARCHAR(255) DEFAULT '' NOT NULL
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+            updated_at DATETIME DEFAULT NULL,
+            deleted_at DATETIME DEFAULT NULL
         )
         SQL);
 
         $this->addSql(<<<'SQL'
         INSERT INTO docs_dg_tmp
-            (id, category_id, title, slug, priority, created_at, updated_at, content_source, content_rendered, filename)
+            (id, category_id, title, slug, priority, created_at, updated_at, deleted_at, content_source, content_rendered, filename)
         SELECT 
-            id, category_id, title, url, priority, created_at, updated_at, content_source, content_rendered, filename
+            id, category_id, title, url, priority, created_at, updated_at, deleted_at, content_source, content_rendered, filename
         FROM docs
         SQL);
 

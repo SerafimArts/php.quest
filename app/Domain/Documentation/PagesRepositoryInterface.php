@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Repository\Documentation;
+namespace App\Domain\Documentation;
 
-use App\Domain\Documentation\Page;
 use App\Domain\Shared\Documentation\PageId;
 use Doctrine\Persistence\ObjectRepository;
 
 /**
  * @template-extends ObjectRepository<Page>
  */
-interface PageRepositoryInterface extends ObjectRepository
+interface PagesRepositoryInterface extends ObjectRepository
 {
     /**
      * @param non-empty-string $filename

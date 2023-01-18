@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Sync;
 
-use App\Infrastructure\Persistence\Repository\Documentation\PageRepositoryInterface;
+use App\Domain\Documentation\PagesRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Clock\ClockInterface;
 use Symfony\Component\Finder\Finder;
@@ -16,7 +16,7 @@ final class Synchronizer
         private readonly string $public,
         private readonly ClockInterface $clock,
         private readonly EntityManagerInterface $em,
-        private readonly PageRepositoryInterface $docs,
+        private readonly PagesRepositoryInterface $docs,
         private readonly PageUpdater $updater,
     ) {
     }

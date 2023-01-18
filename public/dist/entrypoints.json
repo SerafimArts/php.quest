@@ -4,17 +4,17 @@
       "js": [
         "/dist/runtime.7c893af4.js",
         "/dist/527.d12bd62e.js",
-        "/dist/app.aaef6b67.js"
+        "/dist/app.b3586317.js"
       ],
       "css": [
-        "/dist/app.d0ab7ca7.css"
+        "/dist/app.3c075007.css"
       ]
     }
   },
   "integrity": {
     "/dist/runtime.7c893af4.js": "sha384-y1m2o/nzvGhP0BAcu1JZeAvOHpilUmhjX0Wk9QdFHsWP6TClMELLahgwDxAvVFMT",
     "/dist/527.d12bd62e.js": "sha384-F7+yh2oydiwPcpV2ndovzomwyJ1QuU6kQrVqgrkq7u9bNjk0zhQF8i6vU+C1aQ/w",
-    "/dist/app.aaef6b67.js": "sha384-5S9FPL/W1TTrhsSj4BJEvv9njFwVnRB4zWtAd/gSKfsfXaQYGJ1N7VdHvYbAFweH",
-    "/dist/app.d0ab7ca7.css": "sha384-rMfICgOWENFV7FmTK2LqTS7fEOJOn9PwERGWvQp7FlHzHmF9mi1uY1egVGk+AyL6"
+    "/dist/app.b3586317.js": "sha384-cwHEpzZkxCfckO2L1Can39MGd3jO9Vs79YasFdkVniFrlngG0lzIOZfZfa1hrt60",
+    "/dist/app.3c075007.css": "sha384-agTittOCYbIrG0TNMT0NCi4cNk7Fisze/LEkvXOw/zy2yVzdqfMxasgqBiusepsS"
   }
 }

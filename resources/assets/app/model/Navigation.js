@@ -4,9 +4,17 @@ import ko from 'knockout';
 export default class Navigation {
     active: KnockoutObservable<boolean> = ko.observable(false);
 
-    constructor(title: String, slug: String, node: HTMLElement) {
+    constructor(title: String, anchor: String, node: HTMLElement) {
         this.title = title;
-        this.slug = slug;
+        this.anchor = `#${anchor}`;
         this.node = node;
+    }
+
+    static fromNode(node: HTMLElement): Navigation {
+        return new Navigation(
+            node.textContent.trim(),
+            node.getAttribute('data-anchor'),
+            node,
+        );
     }
 }

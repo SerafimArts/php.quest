@@ -3,6 +3,7 @@ import ko from 'knockout';
 import Navigation from '../model/Navigation';
 
 export default class DocumentationViewModel {
+    current: ?KnockoutObservable<Object> = ko.observable(null);
     anchors: KnockoutObservableArray<Navigation> = ko.observableArray([]);
 
     constructor(ctx: HTMLElement) {
@@ -14,6 +15,14 @@ export default class DocumentationViewModel {
                 this.#updateAsideNavigation(window.scrollY);
             });
         });
+
+        this.current.subscribe((page: ?Object) => {
+            if (page === null) {
+                return;
+            }
+
+            setTimeout(() => { this.#load(ctx); }, 1);
+        }, null, 'change');
     }
 
     #updateAsideNavigation(position: Number): void {
@@ -40,14 +49,9 @@ export default class DocumentationViewModel {
     }
 
     #load(node: HTMLElement): void {
+        this.anchors([]);
         for (let anchor of node.querySelectorAll('[data-anchor]')) {
-            let navigation = new Navigation(
-                anchor.textContent.trim(),
-                anchor.getAttribute('data-anchor'),
-                anchor,
-            );
-
-            this.anchors.push(navigation);
+            this.anchors.push(Navigation.fromNode(anchor));
         }
     }
 }

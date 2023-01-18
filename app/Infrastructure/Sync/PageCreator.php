@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Sync;
 
+use App\Domain\Documentation\CategoriesRepositoryInterface;
 use App\Domain\Documentation\Page;
-use App\Infrastructure\Persistence\Repository\Documentation\CategoryRepositoryInterface;
 use Local\ContentRenderer\ResultInterface;
 use Symfony\Component\Finder\SplFileInfo;
 
 final class PageCreator
 {
     public function __construct(
-        private readonly CategoryRepositoryInterface $categories,
+        private readonly CategoriesRepositoryInterface $categories,
     ) {
     }
 
