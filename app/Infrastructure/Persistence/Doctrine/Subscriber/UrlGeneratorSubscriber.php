@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Subscriber;
 
+use App\Domain\NameProviderInterface;
 use App\Domain\UrlProviderInterface;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Event\PrePersistEventArgs;
@@ -12,7 +13,7 @@ use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-final readonly class SlugGeneratorSubscriber implements EventSubscriberInterface
+final readonly class UrlGeneratorSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private SluggerInterface $slugger,
@@ -36,10 +37,10 @@ final readonly class SlugGeneratorSubscriber implements EventSubscriberInterface
     {
         $target = $event->getObject();
 
-        if ($target instanceof UrlProviderInterface) {
-            $slug = $this->slugger->slug($target->getTitle());
+        if ($target instanceof UrlProviderInterface && $target instanceof NameProviderInterface) {
+            $url = $this->slugger->slug($target->getTitle());
 
-            $target->setUrl((string)$slug->lower());
+            $target->setUrl($url);
         }
     }
 

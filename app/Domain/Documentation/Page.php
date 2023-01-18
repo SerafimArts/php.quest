@@ -8,23 +8,27 @@ use App\Domain\Creatable;
 use App\Domain\CreatedDateProviderInterface;
 use App\Domain\Documentation\Page\Content;
 use App\Domain\Documentation\Page\ContentInterface;
+use App\Domain\NameProviderInterface;
+use App\Domain\NameUpdaterInterface;
 use App\Domain\Shared\Documentation\PageId;
 use App\Domain\Shared\EntityInterface;
 use App\Domain\Updatable;
 use App\Domain\UpdatedDateProviderInterface;
 use App\Domain\UrlProviderInterface;
+use App\Domain\UrlUpdaterInterface;
 use App\Infrastructure\Persistence\Doctrine\Generator\UuidGenerator;
 use App\Infrastructure\Persistence\Repository\Documentation\DatabaseCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Psr\Clock\ClockInterface;
 use Psr\Http\Message\UriInterface;
 
-#[ORM\Entity(DatabaseCategoryRepository::class), ORM\Table(name: 'docs', uniqueConstraints: [
-    new ORM\UniqueConstraint('file_idx', ['filename'])
-])]
+#[ORM\Entity(DatabaseCategoryRepository::class), ORM\Table(name: 'docs')]
 class Page implements
     EntityInterface,
+    NameProviderInterface,
+    NameUpdaterInterface,
     UrlProviderInterface,
+    UrlUpdaterInterface,
     ContentProviderInterface,
     CreatedDateProviderInterface,
     UpdatedDateProviderInterface
@@ -48,7 +52,7 @@ class Page implements
      * @var non-empty-string
      */
     #[ORM\Column(type: 'string')]
-    private string $slug = '';
+    private string $url = '';
 
     /**
      * @var Category
@@ -138,7 +142,7 @@ class Page implements
      */
     public function getUrl(): string
     {
-        return $this->slug;
+        return $this->url;
     }
 
     /**
@@ -146,7 +150,7 @@ class Page implements
      */
     public function setUrl(string|UriInterface|\Stringable $url): void
     {
-        $this->slug = match (true) {
+        $this->url = match (true) {
             \is_string($url) => $url,
             $url instanceof UriInterface => \trim($url->getPath(), '/'),
             default => (string)$url,

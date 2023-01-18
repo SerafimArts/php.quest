@@ -30,7 +30,9 @@ services:
   #  Subscribers
   # ----------------------------------------------------------------------------
 
-  App\Infrastructure\Persistence\Doctrine\Subscriber\SlugGeneratorSubscriber:
+  App\Infrastructure\Persistence\Doctrine\Subscriber\UrlGeneratorSubscriber:
+    arguments:
+      $slugger: '@App\Infrastructure\Slugger\CaseInsensitiveSlugger'
     tags:
       - { name: doctrine.event_subscriber }
 
