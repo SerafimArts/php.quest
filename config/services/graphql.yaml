@@ -1,0 +1,17 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  # Custom Input Processors
+  App\Infrastructure\GraphQL\InputTypeValidator: ~
+
+  TheCodingMachine\GraphQLite\SchemaFactory:
+    arguments:
+      - '@Psr\SimpleCache\CacheInterface'
+      - '@service_container'
+    calls:
+      - ['addControllerNamespace', ['App\Controller\GraphQL\']]
+      - ['addTypeNamespace', ['App\Infrastructure\GraphQL\Type\']]
+      - ['setGlobTTL', ['@=parameter("kernel.debug") ? 2 : null']]
+      - ['setInputTypeValidator', ['@App\Infrastructure\GraphQL\InputTypeValidator']]
