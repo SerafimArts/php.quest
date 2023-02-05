@@ -29,12 +29,12 @@ final class GitHubController
 
         try {
             foreach ($this->pipeline->process() as $status => $file) {
-                $result[$file] = $status;
+                $result[$file] = $status->name;
             }
         } catch (\Throwable $e) {
             return new JsonResponse([
                 'error' => true,
-                'status' => $e->getMessage(),
+                'status' => $e->getFile() . ':' . $e->getLine(),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 

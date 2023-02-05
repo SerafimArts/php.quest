@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Domain\Documentation\Page;
 use App\Domain\Documentation\PagesRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Local\TFIDF\IDFCounterInterface;

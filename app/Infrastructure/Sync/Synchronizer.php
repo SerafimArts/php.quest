@@ -38,14 +38,14 @@ final class Synchronizer
 
                 $this->em->persist($document);
 
-                yield Status::UPDATE => $file;
+                yield Status::UPDATE => $file->getRealPath();
 
                 continue;
             }
 
             $this->copy($file, $prefix);
 
-            yield Status::COPY => $file;
+            yield Status::COPY => $file->getRealPath();
         }
     }
 
