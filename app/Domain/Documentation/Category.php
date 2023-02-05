@@ -38,8 +38,8 @@ class Category implements
     /**
      * @var Collection<Page>
      */
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Page::class, fetch: 'EAGER')]
-    #[ORM\OrderBy(['priority' => 'DESC'])]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Page::class)]
+    #[ORM\OrderBy(['priority' => 'ASC'])]
     private Collection $pages;
 
     /**
