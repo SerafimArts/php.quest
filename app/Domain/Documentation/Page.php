@@ -83,7 +83,7 @@ class Page implements
      * @var array<string>
      */
     #[ORM\Column(type: 'simple_array', options: ['default' => ''])]
-    public array $keywords = [];
+    public array $keywords = [''];
 
     /**
      * @var \DateTimeImmutable|null
