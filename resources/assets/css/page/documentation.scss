@@ -193,6 +193,15 @@
 
       &-article {
         flex: 1;
+
+        footer {
+          margin-top: 50px;
+          padding: 50px 0;
+          border-top: $color-gray-light 1px solid;
+          font-size: $font-size-description;
+          line-height: 1.6rem;
+          color: $color-gray-dark;
+        }
       }
 
       &-aside {
