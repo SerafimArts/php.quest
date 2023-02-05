@@ -16,16 +16,18 @@
                     {# menu \App\Domain\Documentation\Category #}
                     {% set menu = page.getCategory() %}
                     {% if menu is not null %}
-                        <div class="breadcrumbs">
                             <!--ko if: current-->
+                            <div class="breadcrumbs" style="display: none" data-bind="style: {display: 'flex'}">
                                 <span class="item" data-bind="text: current().category.title"></span>
                                 <span class="item" data-bind="text: current().title"></span>
+                            </div>
                             <!--/ko-->
                             <!--ko ifnot: current-->
+                            <div class="breadcrumbs">
                                 <span class="item">{{ menu.title }}</span>
                                 <span class="item">{{ page.title }}</span>
+                            </div>
                             <!--/ko-->
-                        </div>
                     {% endif %}
 
                     <!--ko if: current-->
@@ -38,7 +40,7 @@
 
                 <!--ko if: anchors().length > 1 -->
                 <aside class="container-content-aside">
-                    <nav class="container-content-aside-nav" data-bind="foreach: anchors">
+                    <nav class="container-content-aside-nav" style="display: none" data-bind="foreach: anchors, style: {display: 'block'}">
                         <a href="#" data-bind="attr: { href: anchor }, css: { active: active }">
                             <span data-bind="text: $index().toString().padStart(2, '0') + '.'"></span>
                             <!--ko text: title--><!--/ko-->
