@@ -1,0 +1,11 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Local\TFIDF\TFCounterInterface:
+    class: Local\TFIDF\TFCounter
+
+  Local\TFIDF\IDFCounterInterface:
+    class: Local\TFIDF\IDFCounter

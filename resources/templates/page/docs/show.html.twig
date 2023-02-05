@@ -1,9 +1,7 @@
 {% extends 'layout/master.html.twig' %}
 
-{% block title %}
-    {{ page.title }}
-{% endblock %}
-
+{% block title %}{{ page.title }}{% endblock %}
+{% block keywords %}{{ page.keywords | join(', ') }}{% endblock %}
 
 {% block body %}
     {# page \App\Domain\Documentation\Documentation #}

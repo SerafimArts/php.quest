@@ -1,0 +1,41 @@
+{
+    "name": "local/tf-idf",
+    "license": "MIT",
+    "type": "library",
+    "description": "Term Frequency, Inverse Document Frequency",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Kirill Nesmeyanov",
+            "email": "nesk@xakep.ru"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "voku/portable-utf8": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Local\\TFIDF\\": "src"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Local\\TFIDF\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev",
+            "dev-main": "1.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -4,7 +4,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
-        {"type": "path", "url": "libs/content-renderer"}
+        {"type": "path", "url": "libs/content-renderer"},
+        {"type": "path", "url": "libs/tf-idf"}
     ],
     "require": {
         "php": "^8.2",
@@ -16,6 +17,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
         "local/content-renderer": "*",
+        "local/tf-idf": "*",
         "ramsey/uuid": "^4.7",
         "ramsey/uuid-doctrine": "^2.0",
         "symfony/clock": "^6.2",
@@ -41,7 +43,8 @@
         }
     },
     "require-dev": {
-        "fakerphp/faker": "*",
+        "phpunit/phpunit": "^9.5",
+        "fakerphp/faker": "^1.21",
         "symfony/stopwatch": "^6.2",
         "symfony/web-profiler-bundle": "^6.2"
     },

@@ -80,6 +80,12 @@ class Page implements
     private string $filename = '';
 
     /**
+     * @var array<string>
+     */
+    #[ORM\Column(type: 'simple_array', options: ['default' => ''])]
+    public array $keywords = [];
+
+    /**
      * @var \DateTimeImmutable|null
      */
     #[ORM\Column(name: 'deleted_at', type: 'datetimetz_immutable', nullable: true)]
@@ -88,7 +94,8 @@ class Page implements
     /**
      * @param Category $category
      * @param non-empty-string $title
-     * @param string $content
+     * @param string|ContentInterface $content
+     * @param string $filename
      * @param PageId|null $id
      */
     public function __construct(

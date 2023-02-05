@@ -16,8 +16,8 @@
         <meta property="og:type" content="website" />
         <meta property="og:title" content="{{ block('title') }}" />
 
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
+        <meta name="description" content="{% block description %}{% endblock %}" />
+        <meta name="keywords" content="{% block keywords %}{% endblock %}" />
 
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="shortcut icon" href="{{ asset('dist/images/x32.png') }}" />
